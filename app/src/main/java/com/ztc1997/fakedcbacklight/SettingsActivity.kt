@@ -2,10 +2,9 @@ package com.ztc1997.fakedcbacklight
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.*
+import android.content.DialogInterface
+import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.preference.EditTextPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment

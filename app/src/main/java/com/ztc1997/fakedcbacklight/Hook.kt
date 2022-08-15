@@ -1,13 +1,9 @@
 package com.ztc1997.fakedcbacklight
 
 import android.content.Context
-import android.content.Intent
 import android.provider.Settings
 import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
-import java.util.*
-
-const val ACTION_REPORT_CURR_BRIGHT = "com.ztc1997.fakedcbacklight.ACTION_REPORT_CURR_BRIGHT"
 
 class Hook : IXposedHookLoadPackage {
     private var prefs = XSharedPreferences(BuildConfig.APPLICATION_ID, "config")
@@ -58,7 +54,7 @@ class Hook : IXposedHookLoadPackage {
                     ) {
                         Settings.Secure.putInt(
                             ctx.contentResolver,
-                            "reduce_bright_colors_activated",
+                            "reduce_bright_colors_level",
                             0
                         )
                     } else {
@@ -83,15 +79,10 @@ class Hook : IXposedHookLoadPackage {
     }
 
     fun getBoolean(key: String, defValue: Boolean): Boolean {
-        return getBooleanHasChanged(key, defValue).first
-    }
-
-    fun getBooleanHasChanged(key: String, defValue: Boolean): Pair<Boolean, Boolean> {
-        val hasFileChanged = prefs.hasFileChanged()
-        if (hasFileChanged) {
+        if (prefs.hasFileChanged()) {
             prefs.reload()
         }
-        return Pair(prefs.getBoolean(key, defValue), hasFileChanged)
+        return prefs.getBoolean(key, defValue)
     }
 
     fun getFloat(key: String, defValue: Float): Float {

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/title_pref_settings">
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="pref_enable"
+            android:title="@string/title_pref_enable" />
+        <EditTextPreference
+            android:defaultValue="100"
+            android:key="pref_min_screen_bright"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/title_pref_min_screen_bright"
+            android:summary="@string/summary_pref_min_screen_bright" />
+        <EditTextPreference
+            android:defaultValue="90"
+            android:key="pref_max_dim_strength"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="@string/title_pref_max_dim_strength"
+            android:summary="@string/summary_pref_max_dim_strength" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="report_curr_bright"
+            android:title="@string/title_report_curr_bright" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/title_pref_instructions">
+
+        <Preference
+            android:enabled="false"
+            android:key="pref_instructions"
+            android:summary="@string/summary_pref_instructions" />
+
+    </PreferenceCategory>
+
+    <!--<PreferenceCategory android:title="@string/title_pref_about">
+
+        <Preference
+            android:summary="https://github.com/ztc1997/K30NotificationLight"
+            android:title="@string/title_pref_source_code">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/ztc1997/K30NotificationLight" />
+        </Preference>
+
+        <Preference
+            android:summary="https://github.com/ztc1997/K30NotificationLight/issues"
+            android:title="@string/title_pref_feedback">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="https://github.com/ztc1997/K30NotificationLight/issues" />
+        </Preference>
+
+    </PreferenceCategory>-->
+</PreferenceScreen>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Fake DC Backlight</string>
+    <string name="title_pref_settings">Settings</string>
+    <string name="title_pref_instructions">Instructions</string>
+    <string name="summary_pref_instructions">Enable Extra dim when the brightness is lower than the minimum screen brightness. Note: The minimum screen brightness is the brightness value in HAL, not necessarily 0~100% for every model, for example, the Xiaomi Mi 12s is 0~50%, you can turn on \"Print HAL Brightness in Xposed Log\", and then adjust the brightness to the minimum brightness without strobe, then check the Xposed logs. I actually measured that the minimum brightness of Xiaomi Mi 12s is 7.6%, please test other models by yourself</string>
+    <string name="title_pref_about">About</string>
+    <string name="title_pref_source_code">Source code</string>
+    <string name="title_pref_feedback">Feedback</string>
+    <string name="title_pref_enable">Enable Fake DC BackLight</string>
+    <string name="title_pref_min_screen_bright">Minimum screen brightness (%)</string>
+    <string name="summary_pref_min_screen_bright">Enable Extra Dim when screen brightness is lower than this value (0~100)</string>
+    <string name="title_pref_max_dim_strength">Maximum Reduce Bright Strength (%)</string>
+    <string name="summary_pref_max_dim_strength">The larger the value, the darker the screen (0~100), greater than 95 may cause the screen to be hard to read</string>
+    <string name="Tips">Tips</string>
+    <string name="not_support">You seem to be using an outdated version of LSPosed or LSPosed is not active, please update LSPosed or activate it and try again.</string>
+    <string name="title_report_curr_bright">Print HAL Brightness in Xposed Log</string>
+    <string name="xposeddescription">Enable Extra dim when the brightness is lower than the minimum screen brightness.</string>
+</resources>

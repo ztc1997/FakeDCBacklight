@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">伪 DC 调光</string>
+    <string name="title_pref_settings">设置</string>
+    <string name="title_pref_instructions">使用说明</string>
+    <string name="summary_pref_instructions">在亮度低于最低屏幕亮度时启用极暗。注意：最低屏幕亮度是HAL的亮度值，不一定每台机型都是0~100%，例如小米12s是0~50%，你可以打开“输出 HAL 亮度致 Xposed 日志”，然后调整亮度到不会频闪的最小亮度，然后查看Xposed日志。本人实测小米12s最低亮度为7.6%</string>
+    <string name="title_pref_about">关于</string>
+    <string name="title_pref_source_code">源代码</string>
+    <string name="title_pref_feedback">反馈</string>
+    <string name="title_pref_enable">启用伪 DC 调光</string>
+    <string name="title_pref_min_screen_bright">最小屏幕亮度(%)</string>
+    <string name="summary_pref_min_screen_bright">当屏幕亮度低于此值时启用极暗</string>
+    <string name="title_pref_max_dim_strength">最大压暗强度(%)</string>
+    <string name="summary_pref_max_dim_strength">此值越大屏幕越暗，大于95%可能导致屏幕难以看清</string>
+    <string name="Tips">提示</string>
+    <string name="title_report_curr_bright">输出 HAL 亮度致 Xposed 日志</string>
+    <string name="not_support">您似乎正在使用过时的 LSPosed 版本或 LSPosed 未激活，请更新 LSPosed 或者激活后再试。</string>
+    <string name="xposeddescription">在亮度低于最低屏幕亮度时启用极暗</string>
+</resources>

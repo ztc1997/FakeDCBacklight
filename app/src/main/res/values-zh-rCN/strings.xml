@@ -12,7 +12,7 @@
     <string name="title_pref_max_dim_strength">最大压暗强度(%)</string>
     <string name="summary_pref_max_dim_strength">此值越大屏幕越暗，大于95%可能导致屏幕难以看清</string>
     <string name="Tips">提示</string>
-    <string name="title_report_curr_bright">输出 HAL 亮度致 Xposed 日志</string>
+    <string name="title_report_curr_bright">输出 HAL 亮度至 Xposed 日志</string>
     <string name="not_support">您似乎正在使用过时的 LSPosed 版本或 LSPosed 未激活，请更新 LSPosed 或者激活后再试。</string>
     <string name="xposeddescription">在亮度低于最低屏幕亮度时启用极暗</string>
 </resources>

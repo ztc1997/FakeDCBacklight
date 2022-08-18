@@ -39,14 +39,14 @@
 
     </PreferenceCategory>
 
-    <!--<PreferenceCategory android:title="@string/title_pref_about">
+    <PreferenceCategory android:title="@string/title_pref_about">
 
         <Preference
             android:summary="https://github.com/ztc1997/K30NotificationLight"
             android:title="@string/title_pref_source_code">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/ztc1997/K30NotificationLight" />
+                android:data="https://github.com/ztc1997/FakeDCBacklight" />
         </Preference>
 
         <Preference
@@ -54,8 +54,8 @@
             android:title="@string/title_pref_feedback">
             <intent
                 android:action="android.intent.action.VIEW"
-                android:data="https://github.com/ztc1997/K30NotificationLight/issues" />
+                android:data="https://github.com/ztc1997/FakeDCBacklight/issues" />
         </Preference>
 
-    </PreferenceCategory>-->
+    </PreferenceCategory>
 </PreferenceScreen>

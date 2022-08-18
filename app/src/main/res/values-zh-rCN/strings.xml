@@ -2,7 +2,7 @@
     <string name="app_name">伪 DC 调光</string>
     <string name="title_pref_settings">设置</string>
     <string name="title_pref_instructions">使用说明</string>
-    <string name="summary_pref_instructions">在亮度低于最低屏幕亮度时启用极暗。注意：最低屏幕亮度是HAL的亮度值，不一定每台机型都是0~100%，例如小米12s是0~50%，你可以打开“输出 HAL 亮度致 Xposed 日志”，然后调整亮度到不会频闪的最小亮度，然后查看Xposed日志。本人实测小米12s最低亮度为7.6%</string>
+    <string name="summary_pref_instructions">在亮度低于最低屏幕亮度时启用极暗。注意：最低屏幕亮度是HAL的亮度值，不一定每台机型都是0~100%，例如小米12s是0~50%，你可以调整亮度到不会频闪的最小亮度，然后查看\"当前 HAL 亮度\"。本人实测小米12s最低亮度为7.99%</string>
     <string name="title_pref_about">关于</string>
     <string name="title_pref_source_code">源代码</string>
     <string name="title_pref_feedback">反馈</string>

@@ -5,8 +5,9 @@ import android.provider.Settings
 import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
+
 class Hook : IXposedHookLoadPackage {
-    private var prefs = XSharedPreferences(BuildConfig.APPLICATION_ID, "config")
+    private val prefs = XSharedPreferences(BuildConfig.APPLICATION_ID, "config")
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         if (lpparam.packageName != "android") return
 
@@ -32,7 +33,6 @@ class Hook : IXposedHookLoadPackage {
                     if (getBoolean("report_curr_bright", false)) {
                         XposedBridge.log("Fake DC Backlight: HAL Brightness: ${targetBright * 100}%")
                     }
-
 
                     val enable = getBoolean("pref_enable", true)
                     val preEnable =
@@ -74,6 +74,23 @@ class Hook : IXposedHookLoadPackage {
                         )
                         param.args[1] = minScreenBright
                     }
+                }
+            })
+
+        val displayPowerController = XposedHelpers.findClass(
+            "com.android.server.display.DisplayPowerController",
+            lpparam.classLoader
+        )
+        XposedHelpers.findAndHookMethod(
+            displayPowerController,
+            "applyReduceBrightColorsSplineAdjustment",
+            Boolean::class.java,
+            Boolean::class.java,
+            object : XC_MethodHook() {
+                override fun beforeHookedMethod(param: MethodHookParam) {
+                    val enable = getBoolean("pref_enable", true)
+                    if (enable)
+                        param.result = null
                 }
             })
     }

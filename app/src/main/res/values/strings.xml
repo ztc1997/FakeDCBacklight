@@ -13,6 +13,7 @@
     <string name="summary_pref_max_dim_strength">The larger the value, the darker the screen (0~100), greater than 95 may cause the screen to be hard to read</string>
     <string name="Tips">Tips</string>
     <string name="not_support">You seem to be using an outdated version of LSPosed or LSPosed is not active, please update LSPosed or activate it and try again.</string>
-    <string name="title_report_curr_bright">Print HAL Brightness in Xposed Log</string>
     <string name="xposeddescription">Enable Extra dim when the brightness is lower than the minimum screen brightness.</string>
+    <string name="title_pref_hal_brightness">Current HAL Brightness</string>
+    <string name="summary_pref_hal_brightness">Cannot obtain HAL Brightness, Activate the module and reboot and try again</string>
 </resources>

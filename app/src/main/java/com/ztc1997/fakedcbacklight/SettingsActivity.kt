@@ -4,11 +4,15 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.SharedPreferences
+import android.database.ContentObserver
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.preference.EditTextPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.preference.SwitchPreference
+import android.provider.Settings
 import kotlin.system.exitProcess
 
 class SettingsActivity : Activity() {
@@ -20,10 +24,15 @@ class SettingsActivity : Activity() {
 
     class SettingsFragment : PreferenceFragment() {
         private val enable by lazy { findPreference("pref_enable") as SwitchPreference }
-        private val reportCurrBright by lazy { findPreference("report_curr_bright") as SwitchPreference }
         private val minScreenBright by lazy { findPreference("pref_min_screen_bright") as EditTextPreference }
         private val prefMaxDimStrength by lazy { findPreference("pref_max_dim_strength") as EditTextPreference }
+        private val halBright by lazy { findPreference("pref_hal_brightness") as Preference }
         private var sharedPreferences: SharedPreferences? = null
+        private val halBrightObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean) {
+                updateHalBright()
+            }
+        }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -49,12 +58,6 @@ class SettingsActivity : Activity() {
             sharedPreferences = sp
 
             enable.onPreferenceChangeListener =
-                Preference.OnPreferenceChangeListener { prf, value ->
-                    value as Boolean
-                    sp.edit().putBoolean(prf.key, value).apply()
-                    true
-                }
-            reportCurrBright.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     value as Boolean
                     sp.edit().putBoolean(prf.key, value).apply()
@@ -103,6 +106,28 @@ class SettingsActivity : Activity() {
                         90
                     )
                 }%"
+
+            updateHalBright()
+
+            activity.contentResolver.registerContentObserver(
+                Settings.System.getUriFor(HAL_SCREEN_BRIGHTNESS), true,
+                halBrightObserver
+            )
+        }
+
+        override fun onPause() {
+            super.onPause()
+            activity.contentResolver.unregisterContentObserver(halBrightObserver)
+        }
+
+        private fun updateHalBright() {
+            try {
+                activity.contentResolver?.let {
+                    val bright = Settings.System.getFloat(it, HAL_SCREEN_BRIGHTNESS)
+                    halBright.summary = "${bright * 100}%"
+                }
+            } catch (_: Settings.SettingNotFoundException) {
+            }
         }
     }
 }

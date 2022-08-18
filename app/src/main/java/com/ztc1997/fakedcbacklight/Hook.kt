@@ -5,6 +5,7 @@ import android.provider.Settings
 import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
+const val HAL_SCREEN_BRIGHTNESS = "COM_ZTC1997_FAKEDCBACKLIGHT_HAL_SCREEN_BRIGHTNESS"
 
 class Hook : IXposedHookLoadPackage {
     private val prefs = XSharedPreferences(BuildConfig.APPLICATION_ID, "config")
@@ -30,9 +31,11 @@ class Hook : IXposedHookLoadPackage {
                         ) as Context
                     val targetBright = param.args[1] as Float
 
-                    if (getBoolean("report_curr_bright", false)) {
-                        XposedBridge.log("Fake DC Backlight: HAL Brightness: ${targetBright * 100}%")
-                    }
+                    Settings.System.putFloat(
+                        ctx.contentResolver,
+                        HAL_SCREEN_BRIGHTNESS,
+                        targetBright
+                    )
 
                     val enable = getBoolean("pref_enable", true)
                     val preEnable =

@@ -69,11 +69,13 @@ class SettingsActivity : Activity() {
                                 0
                             )
                         if (Intent.ACTION_SCREEN_ON.equals(intent.action)) {
-                            Settings.System.putInt(
-                                ctx.contentResolver,
-                                "screen_brightness_mode",
-                                1
-                            )
+                            Handler().postDelayed({
+                                Settings.System.putInt(
+                                    ctx.contentResolver,
+                                    "screen_brightness_mode",
+                                    1
+                                )
+                            },1000)
                         }
                     }
                 }

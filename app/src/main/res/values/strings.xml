@@ -16,4 +16,6 @@
     <string name="xposeddescription">Enable Extra dim when the brightness is lower than the minimum screen brightness.</string>
     <string name="title_pref_hal_brightness">Current HAL Brightness</string>
     <string name="summary_pref_hal_brightness">Cannot obtain HAL Brightness, Activate the module and reboot and try again</string>
+    <string name="title_off_screen_optim">Off Screen Optimization</string>
+    <string name="summary_off_screen_optim">When the device is pulled out or buckled on the table and re -picked up, if the brightness increases sharply, try to check</string>
 </resources>

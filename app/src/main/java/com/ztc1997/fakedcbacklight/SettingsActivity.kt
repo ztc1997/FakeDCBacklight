@@ -2,9 +2,9 @@ package com.ztc1997.fakedcbacklight
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.content.SharedPreferences
+import android.content.*
 import android.database.ContentObserver
+import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -15,6 +15,7 @@ import android.preference.SwitchPreference
 import android.provider.Settings
 import kotlin.system.exitProcess
 
+
 class SettingsActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class SettingsActivity : Activity() {
 
     class SettingsFragment : PreferenceFragment() {
         private val enable by lazy { findPreference("pref_enable") as SwitchPreference }
+        private val offScreenOptim by lazy { findPreference("off_screen_optim") as SwitchPreference }
         private val minScreenBright by lazy { findPreference("pref_min_screen_bright") as EditTextPreference }
         private val prefMaxDimStrength by lazy { findPreference("pref_max_dim_strength") as EditTextPreference }
         private val halBright by lazy { findPreference("pref_hal_brightness") as Preference }
@@ -57,12 +59,60 @@ class SettingsActivity : Activity() {
             }
             sharedPreferences = sp
 
+            class ScreenListener : BroadcastReceiver() {
+                override fun onReceive(ctx: Context, intent: Intent) {
+                    if (sp.getBoolean("off_screen_optim", false)) {
+                        if (Intent.ACTION_SCREEN_OFF.equals(intent.action))
+                            Settings.System.putInt(
+                                ctx.contentResolver,
+                                "screen_brightness_mode",
+                                0
+                            )
+                        if (Intent.ACTION_SCREEN_ON.equals(intent.action)) {
+                            Settings.System.putInt(
+                                ctx.contentResolver,
+                                "screen_brightness_mode",
+                                1
+                            )
+                        }
+                    }
+                }
+            }
+
+            val screenListener = ScreenListener()
+            val filter = IntentFilter().apply {
+                addAction(Intent.ACTION_SCREEN_ON)
+                addAction(Intent.ACTION_SCREEN_OFF)
+            }
+            context.registerReceiver(screenListener, filter)
+
             enable.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     value as Boolean
                     sp.edit().putBoolean(prf.key, value).apply()
                     true
                 }
+            offScreenOptim.onPreferenceChangeListener =
+                Preference.OnPreferenceChangeListener { prf, value ->
+                    value as Boolean
+                    if (value) {
+                        if (!Settings.System.canWrite(context)) {
+                            val intent = Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS)
+                            intent.data = Uri.parse("package:" + context.packageName)
+                            context.startActivity(intent)
+                        }
+                        if (Settings.System.canWrite(context)) {
+                            sp.edit().putBoolean(prf.key, value).apply()
+                            true
+                        } else {
+                            false
+                        }
+                    } else {
+                        sp.edit().putBoolean(prf.key, value).apply()
+                        true
+                    }
+                }
+
             minScreenBright.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     val f = (value as String).toFloat() / 100
@@ -85,6 +135,7 @@ class SettingsActivity : Activity() {
                     }
                     valid
                 }
+
         }
 
         override fun onResume() {
@@ -113,6 +164,7 @@ class SettingsActivity : Activity() {
                 Settings.System.getUriFor(HAL_SCREEN_BRIGHTNESS), true,
                 halBrightObserver
             )
+
         }
 
         override fun onPause() {

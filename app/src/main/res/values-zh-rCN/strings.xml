@@ -16,4 +16,6 @@
     <string name="xposeddescription">在亮度低于最低屏幕亮度时启用极暗</string>
     <string name="title_pref_hal_brightness">当前 HAL 亮度</string>
     <string name="summary_pref_hal_brightness">无法获取 HAL 亮度，激活模块并重启，然后重试</string>
+    <string name="title_off_screen_optim">息屏优化</string>
+    <string name="summary_off_screen_optim">若设备从口袋掏出或扣在桌子上重新拿起时发生亮度急剧增加，尝试勾选</string>
 </resources>

@@ -7,6 +7,11 @@
             android:defaultValue="true"
             android:key="pref_enable"
             android:title="@string/title_pref_enable" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="off_screen_optim"
+            android:summary="@string/summary_off_screen_optim"
+            android:title="@string/title_off_screen_optim" />
         <EditTextPreference
             android:defaultValue="100"
             android:key="pref_min_screen_bright"

@@ -66,7 +66,7 @@ class SettingsActivity : Activity() {
             minScreenBright.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     val f = (value as String).toFloat() / 100
-                    val valid = f in 0.0..1.0
+                    val valid = f > 0.0
                     if (valid) {
                         sp.edit().putFloat(prf.key, f).apply()
                         minScreenBright.summary =

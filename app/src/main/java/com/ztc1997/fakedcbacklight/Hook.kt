@@ -6,6 +6,7 @@ import de.robv.android.xposed.*
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
 const val HAL_SCREEN_BRIGHTNESS = "COM_ZTC1997_FAKEDCBACKLIGHT_HAL_SCREEN_BRIGHTNESS"
+const val REDUCE_BRIGHT_LEVEL = "COM_ZTC1997_FAKEDCBACKLIGHT_REDUCE_BRIGHT_LEVEL"
 
 class Hook : IXposedHookLoadPackage {
     private val prefs = XSharedPreferences(BuildConfig.APPLICATION_ID, "config")
@@ -85,6 +86,16 @@ class Hook : IXposedHookLoadPackage {
                         ctx.contentResolver,
                         HAL_SCREEN_BRIGHTNESS,
                         targetBright
+                    )
+                    val level = Settings.Secure.getInt(
+                        ctx.contentResolver,
+                        "reduce_bright_colors_level",
+                        0
+                    )
+                    Settings.System.putInt(
+                        ctx.contentResolver,
+                        REDUCE_BRIGHT_LEVEL,
+                        level
                     )
                 }
             })

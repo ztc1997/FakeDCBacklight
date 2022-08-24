@@ -28,6 +28,12 @@
             android:title="@string/title_pref_hal_brightness"
             android:summary="@string/summary_pref_hal_brightness"/>
 
+        <Preference
+            android:enabled="false"
+            android:key="pref_reduce_bright"
+            android:title="@string/title_pref_reduce_bright"
+            android:summary="@string/summary_pref_reduce_bright"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/title_pref_instructions">

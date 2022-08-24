@@ -27,10 +27,16 @@ class SettingsActivity : Activity() {
         private val minScreenBright by lazy { findPreference("pref_min_screen_bright") as EditTextPreference }
         private val prefMaxDimStrength by lazy { findPreference("pref_max_dim_strength") as EditTextPreference }
         private val halBright by lazy { findPreference("pref_hal_brightness") as Preference }
+        private val reduceBright by lazy { findPreference("pref_reduce_bright") as Preference }
         private var sharedPreferences: SharedPreferences? = null
         private val halBrightObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
             override fun onChange(selfChange: Boolean) {
                 updateHalBright()
+            }
+        }
+        private val reduceBrightObserver = object : ContentObserver(Handler(Looper.getMainLooper())) {
+            override fun onChange(selfChange: Boolean) {
+                updateReduceBright()
             }
         }
 
@@ -108,16 +114,23 @@ class SettingsActivity : Activity() {
                 }%"
 
             updateHalBright()
+            updateReduceBright()
 
             activity.contentResolver.registerContentObserver(
                 Settings.System.getUriFor(HAL_SCREEN_BRIGHTNESS), true,
                 halBrightObserver
+            )
+
+            activity.contentResolver.registerContentObserver(
+                Settings.System.getUriFor(REDUCE_BRIGHT_LEVEL), true,
+                reduceBrightObserver
             )
         }
 
         override fun onPause() {
             super.onPause()
             activity.contentResolver.unregisterContentObserver(halBrightObserver)
+            activity.contentResolver.unregisterContentObserver(reduceBrightObserver)
         }
 
         private fun updateHalBright() {
@@ -125,6 +138,16 @@ class SettingsActivity : Activity() {
                 activity.contentResolver?.let {
                     val bright = Settings.System.getFloat(it, HAL_SCREEN_BRIGHTNESS)
                     halBright.summary = "${bright * 100}%"
+                }
+            } catch (_: Settings.SettingNotFoundException) {
+            }
+        }
+
+        private fun updateReduceBright() {
+            try {
+                activity.contentResolver?.let {
+                    val level = Settings.System.getInt(it, REDUCE_BRIGHT_LEVEL)
+                    reduceBright.summary = "$level%"
                 }
             } catch (_: Settings.SettingNotFoundException) {
             }

@@ -9,7 +9,7 @@
     <string name="title_pref_enable">启用伪 DC 调光</string>
     <string name="title_pref_min_screen_bright">最小屏幕亮度(%)</string>
     <string name="summary_pref_min_screen_bright">当屏幕亮度低于此值时启用极暗</string>
-    <string name="title_pref_max_dim_strength">最大压暗强度(%)</string>
+    <string name="title_pref_max_dim_strength">压暗强度缩放(%)</string>
     <string name="summary_pref_max_dim_strength">此值越大屏幕越暗，大于95%可能导致屏幕难以看清</string>
     <string name="Tips">提示</string>
     <string name="not_support">您似乎正在使用过时的 LSPosed 版本或 LSPosed 未激活，请更新 LSPosed 或者激活后再试。</string>

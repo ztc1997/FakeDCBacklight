@@ -77,7 +77,7 @@ class SettingsActivity : Activity() {
             prefMaxDimStrength.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     val i = (value as String).toInt()
-                    val valid = i in 0..100
+                    val valid = i in 0..110
                     if (valid) {
                         sp.edit().putInt(prf.key, i).apply()
                         prefMaxDimStrength.summary =

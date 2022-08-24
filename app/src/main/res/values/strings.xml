@@ -9,7 +9,7 @@
     <string name="title_pref_enable">Enable Fake DC BackLight</string>
     <string name="title_pref_min_screen_bright">Minimum screen brightness (%)</string>
     <string name="summary_pref_min_screen_bright">Enable Extra Dim when screen brightness is lower than this value (0~100)</string>
-    <string name="title_pref_max_dim_strength">Maximum Reduce Bright Strength (%)</string>
+    <string name="title_pref_max_dim_strength">Reduce Bright Strength Scaling (%)</string>
     <string name="summary_pref_max_dim_strength">The larger the value, the darker the screen (0~100), greater than 95 may cause the screen to be hard to read</string>
     <string name="Tips">Tips</string>
     <string name="not_support">You seem to be using an outdated version of LSPosed or LSPosed is not active, please update LSPosed or activate it and try again.</string>

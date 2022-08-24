@@ -31,12 +31,6 @@ class Hook : IXposedHookLoadPackage {
                         ) as Context
                     val targetBright = param.args[1] as Float
 
-                    Settings.System.putFloat(
-                        ctx.contentResolver,
-                        HAL_SCREEN_BRIGHTNESS,
-                        targetBright
-                    )
-
                     val enable = getBoolean("pref_enable", true)
                     val preEnable =
                         XposedHelpers.getAdditionalInstanceField(param.thisObject, "preEnable")
@@ -77,6 +71,21 @@ class Hook : IXposedHookLoadPackage {
                         )
                         param.args[1] = minScreenBright
                     }
+                }
+
+                override fun afterHookedMethod(param: MethodHookParam) {
+                    val localDisplayAdapter = XposedHelpers.getSurroundingThis(param.thisObject)
+                    val ctx =
+                        XposedHelpers.callMethod(
+                            localDisplayAdapter,
+                            "getOverlayContext"
+                        ) as Context
+                    val targetBright = param.args[1] as Float
+                    Settings.System.putFloat(
+                        ctx.contentResolver,
+                        HAL_SCREEN_BRIGHTNESS,
+                        targetBright
+                    )
                 }
             })
 

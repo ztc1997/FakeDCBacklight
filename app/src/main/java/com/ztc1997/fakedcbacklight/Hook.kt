@@ -104,12 +104,18 @@ class Hook : IXposedHookLoadPackage {
             "com.android.server.display.DisplayPowerController",
             lpparam.classLoader
         )
-        XposedHelpers.findAndHookMethod(
-            displayPowerController,
-            "applyReduceBrightColorsSplineAdjustment",
-            Boolean::class.java,
-            Boolean::class.java,
-            object : XC_MethodHook() {
+
+        XposedBridge.hookAllMethods(displayPowerController,
+            "applyReduceBrightColorsSplineAdjustment", object : XC_MethodHook() {
+                override fun beforeHookedMethod(param: MethodHookParam) {
+                    val enable = getBoolean("pref_enable", true)
+                    if (enable)
+                        param.result = null
+                }
+            })
+
+        XposedBridge.hookAllMethods(displayPowerController,
+            "handleRbcChanged", object : XC_MethodHook() {
                 override fun beforeHookedMethod(param: MethodHookParam) {
                     val enable = getBoolean("pref_enable", true)
                     if (enable)

@@ -7,6 +7,13 @@
             android:defaultValue="true"
             android:key="pref_enable"
             android:title="@string/title_pref_enable" />
+
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="pref_disable_on_screenoff"
+            android:title="@string/title_pref_disable_on_screenoff"
+            android:summary="@string/summary_pref_disable_on_screenoff"/>
+
         <EditTextPreference
             android:defaultValue="100"
             android:key="pref_min_screen_bright"

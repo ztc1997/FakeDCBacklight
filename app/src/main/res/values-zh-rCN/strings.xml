@@ -7,6 +7,8 @@
     <string name="title_pref_source_code">源代码</string>
     <string name="title_pref_feedback">反馈</string>
     <string name="title_pref_enable">启用伪 DC 调光</string>
+    <string name="title_pref_disable_on_screenoff">息屏时禁用</string>
+    <string name="summary_pref_disable_on_screenoff">解决AOD亮度和屏下指纹问题，可能造成开屏时闪烁</string>
     <string name="title_pref_min_screen_bright">最小屏幕亮度(%)</string>
     <string name="summary_pref_min_screen_bright">当屏幕亮度低于此值时启用极暗</string>
     <string name="title_pref_max_dim_strength">压暗强度缩放(%)</string>

@@ -24,6 +24,7 @@ class SettingsActivity : Activity() {
 
     class SettingsFragment : PreferenceFragment() {
         private val enable by lazy { findPreference("pref_enable") as SwitchPreference }
+        private val disableOnScreenoff by lazy { findPreference("pref_disable_on_screenoff") as SwitchPreference }
         private val minScreenBright by lazy { findPreference("pref_min_screen_bright") as EditTextPreference }
         private val prefMaxDimStrength by lazy { findPreference("pref_max_dim_strength") as EditTextPreference }
         private val halBright by lazy { findPreference("pref_hal_brightness") as Preference }
@@ -64,6 +65,12 @@ class SettingsActivity : Activity() {
             sharedPreferences = sp
 
             enable.onPreferenceChangeListener =
+                Preference.OnPreferenceChangeListener { prf, value ->
+                    value as Boolean
+                    sp.edit().putBoolean(prf.key, value).apply()
+                    true
+                }
+            disableOnScreenoff.onPreferenceChangeListener =
                 Preference.OnPreferenceChangeListener { prf, value ->
                     value as Boolean
                     sp.edit().putBoolean(prf.key, value).apply()

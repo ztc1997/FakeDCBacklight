@@ -48,14 +48,15 @@ class Hook : IXposedHookLoadPackage {
 
                     val minScreenBright = getFloat("pref_min_screen_bright", 1f)
                     if (targetBright >= minScreenBright ||
-                        targetBright < 0
+                        (targetBright < 0 &&
+                                getBoolean("pref_disable_on_screenoff", false))
                     ) {
                         Settings.Secure.putInt(
                             ctx.contentResolver,
                             "reduce_bright_colors_level",
                             0
                         )
-                    } else {
+                    } else if (targetBright >= 0) {
                         val dim = (1 - (targetBright / minScreenBright)) * getInt(
                             "pref_max_dim_strength",
                             90

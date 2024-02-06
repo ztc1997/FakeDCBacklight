@@ -7,6 +7,8 @@
     <string name="title_pref_source_code">Source code</string>
     <string name="title_pref_feedback">Feedback</string>
     <string name="title_pref_enable">Enable Fake DC BackLight</string>
+    <string name="title_pref_disable_on_screenoff">Disable on Screenoff</string>
+    <string name="summary_pref_disable_on_screenoff">Solve the problem of AOD brightness and under-screen fingerprint, which may cause flickering when opening the screen</string>
     <string name="title_pref_min_screen_bright">Minimum screen brightness (%)</string>
     <string name="summary_pref_min_screen_bright">Enable Extra Dim when screen brightness is lower than this value (0~100)</string>
     <string name="title_pref_max_dim_strength">Reduce Bright Strength Scaling (%)</string>
